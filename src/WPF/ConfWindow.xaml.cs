@@ -33,7 +33,7 @@ namespace mpvnet
             LoadSettings();
             InitialContent = GetCompareString();
             SearchControl.Text = App.Settings.ConfigEditorSearch;
-            FilterListBox.SelectedItem = SearchControl.Text.TrimEnd(':');
+            //FilterListBox.SelectedItem = SearchControl.Text.TrimEnd(':');
         }
 
         static string GetThemeConf() => App.IsDarkMode + App.DarkTheme + App.LightTheme;
@@ -291,7 +291,7 @@ namespace mpvnet
                     else
                         i.Visibility = Visibility.Collapsed;
 
-                FilterListBox.SelectedItem = null;
+                //FilterListBox.SelectedItem = null;
             }
             else
                 foreach (UIElement i in MainStackPanel.Children)
@@ -332,5 +332,11 @@ namespace mpvnet
         }
 
         void ShowMpvNetSpecific_MouseUp(object sender, MouseButtonEventArgs e) => SearchControl.Text = "mpv.net";
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+                SearchControl.Text = e.AddedItems[0] + ":";
+        }
     }
 }

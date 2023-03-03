@@ -14,7 +14,7 @@ namespace mpvnet
     {
         public static List<ConfSection> Parse(string content)
         {
-            string[] lines = content.Split(new[] { "\r\n" }, System.StringSplitOptions.None);
+            string[] lines = content.Split(new[] { "\n" }, System.StringSplitOptions.None);
             var sections = new List<ConfSection>();
             ConfSection currentGroup = null;
 

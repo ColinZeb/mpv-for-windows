@@ -33,13 +33,9 @@
         
         <TextBox
             Name="SearchTextBox"
-            Height="25"
-            BorderThickness="2"
-            Padding="2"
-            Background="Transparent"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+    VerticalAlignment="Top"
             TextChanged="SearchTextBox_TextChanged"
-            Foreground="{Binding Theme.Foreground}"
-            CaretBrush="{Binding Theme.Foreground}"
             />
         
         <Button

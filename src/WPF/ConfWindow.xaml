@@ -7,7 +7,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     mc:Ignorable="d"
-     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -16,7 +16,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
     Title="Config Editor"
-    Height="540"
+    Height="740"
     Width="700"
     Foreground="{Binding Theme.Foreground}"
     ShowInTaskbar="False"
@@ -53,35 +53,23 @@
             
             <StackPanel x:Name="MainStackPanel"></StackPanel>
         </ScrollViewer>
-        
+
         <StackPanel Margin="20,0,0,0" Grid.Row="1">
-            <ListBox
-                Name="FilterListBox"
-                ItemsSource="{Binding FilterStrings}"
-                BorderThickness="0"
-                SelectionChanged="FilterListBox_SelectionChanged"
-                Foreground="{Binding Theme.Heading}"
-                Background="{DynamicResource MaterialDesignPaper}"
-                >
-
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Style.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="3"/>
-                            </Style>
-                        </Style.Resources>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-
-                <ListBox.ItemTemplate>
+            <TabControl 
+                    ItemsSource="{Binding FilterStrings}"
+                    Style="{StaticResource MaterialDesignFilledTabControl}"
+                    SelectionChanged="TabControl_SelectionChanged"
+                    TabStripPlacement="Left">
+                <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" FontSize="16" />
+                        <TextBlock
+        Margin="4"
+        Text="{Binding}" />
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </TabControl.ItemTemplate>
 
-            <TextBlock Name="ShowMpvNetSpecific"    Margin="0,15,0,0" Cursor="Hand" TextWrapping="WrapWithOverflow" Foreground="{Binding Theme.Heading}" MouseUp="ShowMpvNetSpecific_MouseUp">Show mpv.net specific options</TextBlock>
+            </TabControl>
+            <TextBlock Name="ShowMpvNetSpecific"  Style="{StaticResource MaterialDesignSubtitle2TextBlock}"   Margin="0,15,0,0" Cursor="Hand" TextWrapping="WrapWithOverflow" Foreground="{Binding Theme.Heading}" MouseUp="ShowMpvNetSpecific_MouseUp">Show mpv.net specific options</TextBlock>
             <TextBlock Name="PreviewTextBlock"      Margin="0,15,0,0" Cursor="Hand" TextWrapping="WrapWithOverflow" Foreground="{Binding Theme.Heading}" MouseUp="PreviewTextBlock_MouseUp">Preview mpv.conf</TextBlock>
             <TextBlock Name="ShowManualTextBlock"   Margin="0,15,0,0" Cursor="Hand" TextWrapping="WrapWithOverflow" Foreground="{Binding Theme.Heading}" MouseUp="ShowManualTextBlock_MouseUp">Show mpv manual</TextBlock>
         </StackPanel>

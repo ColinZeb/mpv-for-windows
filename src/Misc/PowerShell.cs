@@ -13,7 +13,7 @@ namespace mpvnet
     public class PowerShell
     {
         public Runspace Runspace { get; set; }
-        public Pipeline Pipeline { get; set; }
+        //public Pipeline Pipeline { get; set; }
         public string Module { get; set; }
         public bool Print { get; set; }
         public List<string> Scripts { get; } = new List<string>();
@@ -30,48 +30,49 @@ namespace mpvnet
 
         public object Invoke(string variable, object obj)
         {
-            try
-            {
-                Runspace = RunspaceFactory.CreateRunspace();
-                Runspace.ApartmentState = ApartmentState.STA;
-                Runspace.Open();
-                Pipeline = Runspace.CreatePipeline();
+            //try
+            //{
+            //    Runspace = RunspaceFactory.CreateRunspace();
+            //    Runspace.ApartmentState = ApartmentState.STA;
+            //    Runspace.Open();
+            //    Pipeline = Runspace.CreatePipeline();
 
-                foreach (string script in Scripts)
-                    Pipeline.Commands.AddScript(script);
+            //    foreach (string script in Scripts)
+            //        Pipeline.Commands.AddScript(script);
 
-                if (Arguments != null)
-                    foreach (string param in Arguments)
-                        foreach (Command command in Pipeline.Commands)
-                            command.Parameters.Add(null, param);
+            //    if (Arguments != null)
+            //        foreach (string param in Arguments)
+            //            foreach (Command command in Pipeline.Commands)
+            //                command.Parameters.Add(null, param);
 
-                Runspace.SessionStateProxy.SetVariable("mp", this);
+            //    Runspace.SessionStateProxy.SetVariable("mp", this);
 
-                foreach (var i in Variables)
-                    Runspace.SessionStateProxy.SetVariable(i.Key, i.Value);
+            //    foreach (var i in Variables)
+            //        Runspace.SessionStateProxy.SetVariable(i.Key, i.Value);
 
-                if (!string.IsNullOrEmpty(variable))
-                    Runspace.SessionStateProxy.SetVariable(variable, obj);
+            //    if (!string.IsNullOrEmpty(variable))
+            //        Runspace.SessionStateProxy.SetVariable(variable, obj);
 
-                if (Print)
-                {
-                    Pipeline.Output.DataReady += Output_DataReady;
-                    Pipeline.Error.DataReady += Error_DataReady;
-                }
+            //    if (Print)
+            //    {
+            //        Pipeline.Output.DataReady += Output_DataReady;
+            //        Pipeline.Error.DataReady += Error_DataReady;
+            //    }
 
-                return Pipeline.Invoke();
-            }
-            catch (RuntimeException e)
-            {
-                string message = e.Message + BR + BR + e.ErrorRecord.ScriptStackTrace.Replace(
-                    " <ScriptBlock>, <No file>", "") + BR + BR + Module + BR;
+            //    return Pipeline.Invoke();
+            //}
+            //catch (RuntimeException e)
+            //{
+            //    string message = e.Message + BR + BR + e.ErrorRecord.ScriptStackTrace.Replace(
+            //        " <ScriptBlock>, <No file>", "") + BR + BR + Module + BR;
 
-                throw new PowerShellException(message);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }        
+            //    throw new PowerShellException(message);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw e;
+            //}
+            return null;
         }
 
         public static string InvokeAndReturnString(string code, string varName, object varValue)
@@ -86,18 +87,18 @@ namespace mpvnet
 
         public void Output_DataReady(object sender, EventArgs e)
         {
-            var output = sender as PipelineReader<PSObject>;
+            //var output = sender as PipelineReader<PSObject>;
 
-            while (output.Count > 0)
-                Terminal.Write(output.Read(), Module);
+            //while (output.Count > 0)
+            //    Terminal.Write(output.Read(), Module);
         }
 
         public void Error_DataReady(object sender, EventArgs e)
         {
-            var output = sender as PipelineReader<object>;
+            //var output = sender as PipelineReader<object>;
 
-            while (output.Count > 0)
-                Terminal.WriteError(output.Read(), Module);
+            //while (output.Count > 0)
+            //    Terminal.WriteError(output.Read(), Module);
         }
 
         public void RedirectStreams(PSEventJob job)
