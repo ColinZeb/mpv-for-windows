@@ -2,13 +2,16 @@
 using System;
 using System.Linq;
 using System.Windows.Controls;
+using System.Windows.Shell;
+using MaterialDesignThemes.Wpf;
 
 namespace mpvnet
 {
     public class MenuHelp
     {
-        public static MenuItem Add(ItemCollection items, string path)
+        public static MenuItem Add(ItemCollection items, string path, string icon = null)
         {
+            //PackIconKind.OpenInApp
             string[] a = path.Split(new[] { " > ", " | " }, StringSplitOptions.RemoveEmptyEntries);
             ItemCollection itemCollection = items;
 
@@ -24,6 +27,8 @@ namespace mpvnet
                         {
                             found = true;
                             itemCollection = i.Items;
+
+                            SetIcon(icon, i);
                         }
                     }
                 }
@@ -39,6 +44,7 @@ namespace mpvnet
                             MenuItem item = new MenuItem() { Header = a[x] };
                             itemCollection.Add(item);
                             itemCollection = item.Items;
+                            SetIcon(icon, item);
                             return item;
                         }
                     }
@@ -47,10 +53,23 @@ namespace mpvnet
                         MenuItem item = new MenuItem() { Header = a[x] };
                         itemCollection.Add(item);
                         itemCollection = item.Items;
+                        SetIcon(icon, item);
                     }
                 }
             }
             return null;
+        }
+
+        private static void SetIcon(string icon, MenuItem item)
+        {
+            if (icon != null)
+            {
+                if (Enum.TryParse(icon, out PackIconKind pk))
+                {
+
+                    item.Icon = new PackIcon { Kind = pk };
+                }
+            }
         }
     }
 }

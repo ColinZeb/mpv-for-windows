@@ -7,12 +7,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     mc:Ignorable="d"
-    
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
     Title="Config Editor"
     Height="540"
     Width="700"
     Foreground="{Binding Theme.Foreground}"
-    Background="{Binding Theme.Background}"
     ShowInTaskbar="False"
     WindowStartupLocation="CenterScreen"
     Loaded="ConfWindow1_Loaded"
@@ -55,7 +61,7 @@
                 BorderThickness="0"
                 SelectionChanged="FilterListBox_SelectionChanged"
                 Foreground="{Binding Theme.Heading}"
-                Background="{Binding Theme.Background}"
+                Background="{DynamicResource MaterialDesignPaper}"
                 >
 
                 <ListBox.ItemContainerStyle>

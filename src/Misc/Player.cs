@@ -38,7 +38,7 @@ namespace mpvnet
         public event Action SeekAsync;                              // seek               MPV_EVENT_SEEK
         public event Action PlaybackRestartAsync;                   // playback-restart   MPV_EVENT_PLAYBACK_RESTART
 
-        public event Action<mpv_log_level, string>LogMessage; // log-message        MPV_EVENT_LOG_MESSAGE
+        public event Action<mpv_log_level, string> LogMessage; // log-message        MPV_EVENT_LOG_MESSAGE
         public event Action<mpv_end_file_reason> EndFile;     // end-file           MPV_EVENT_END_FILE
         public event Action<string[]> ClientMessage;          // client-message     MPV_EVENT_CLIENT_MESSAGE
         public event Action Shutdown;                         // shutdown           MPV_EVENT_SHUTDOWN
@@ -65,9 +65,9 @@ namespace mpvnet
         public event Action<Size> VideoSizeChangedAsync;
         public event Action<string> MoveWindow;
 
-        public Dictionary<string, List<Action>>               PropChangeActions { get; set; } = new Dictionary<string, List<Action>>();
-        public Dictionary<string, List<Action<int>>>       IntPropChangeActions { get; set; } = new Dictionary<string, List<Action<int>>>();
-        public Dictionary<string, List<Action<bool>>>     BoolPropChangeActions { get; set; } = new Dictionary<string, List<Action<bool>>>();
+        public Dictionary<string, List<Action>> PropChangeActions { get; set; } = new Dictionary<string, List<Action>>();
+        public Dictionary<string, List<Action<int>>> IntPropChangeActions { get; set; } = new Dictionary<string, List<Action<int>>>();
+        public Dictionary<string, List<Action<bool>>> BoolPropChangeActions { get; set; } = new Dictionary<string, List<Action<bool>>>();
         public Dictionary<string, List<Action<double>>> DoublePropChangeActions { get; set; } = new Dictionary<string, List<Action<double>>>();
         public Dictionary<string, List<Action<string>>> StringPropChangeActions { get; set; } = new Dictionary<string, List<Action<string>>>();
 
@@ -85,6 +85,7 @@ namespace mpvnet
         public string ConfPath { get => ConfigFolder + "mpv.conf"; }
         public string GPUAPI { get; set; } = "auto";
         public string InputConfPath => ConfigFolder + "input.conf";
+        public string InputJsonPath => ConfigFolder + "input.json";
         public string Path { get; set; } = "";
         public string VO { get; set; } = "gpu";
 
@@ -178,8 +179,9 @@ namespace mpvnet
             SetPropertyString("idle", "yes");
 
             ObservePropertyDouble("window-scale", value => WindowScaleMpv(value));
-          
-            ObservePropertyString("path", value => {
+
+            ObservePropertyString("path", value =>
+            {
                 if (HistoryTime == DateTime.MinValue)
                 {
                     HistoryTime = DateTime.Now;
@@ -188,23 +190,26 @@ namespace mpvnet
                 Path = value;
             });
 
-            ObservePropertyBool("pause", value => {
+            ObservePropertyBool("pause", value =>
+            {
                 Paused = value;
                 Pause();
             });
 
-            ObservePropertyInt("video-rotate", value => {
+            ObservePropertyInt("video-rotate", value =>
+            {
                 VideoRotate = value;
                 UpdateVideoSize("dwidth", "dheight");
             });
 
-            ObservePropertyInt("playlist-pos", value => {
+            ObservePropertyInt("playlist-pos", value =>
+            {
                 PlaylistPos = value;
                 InvokeEvent(PlaylistPosChanged, PlaylistPosChangedAsync, value);
 
                 if (value == -1 && Core.Shown)
                     ShowLogo();
-                
+
                 if (value != -1)
                     HideLogo();
 
@@ -307,8 +312,10 @@ namespace mpvnet
 
         bool? _UseNewMsgModel;
 
-        public bool UseNewMsgModel {
-            get {
+        public bool UseNewMsgModel
+        {
+            get
+            {
                 if (!_UseNewMsgModel.HasValue)
                     _UseNewMsgModel = InputConfContent.Contains("script-message-to mpvnet");
                 return _UseNewMsgModel.Value;
@@ -317,18 +324,33 @@ namespace mpvnet
 
         string _InputConfContent;
 
-        public string InputConfContent {
-            get {
+        public string InputConfContent
+        {
+            get
+            {
                 if (_InputConfContent == null)
                     _InputConfContent = File.ReadAllText(Core.InputConfPath);
                 return _InputConfContent;
             }
         }
 
+        string _InputJsonContent;
+        public string InputJsonContent
+        {
+            get
+            {
+                if (_InputJsonContent == null)
+                    _InputJsonContent = File.ReadAllText(Core.InputJsonPath);
+                return _InputJsonContent;
+            }
+        }
+
         string _ConfigFolder;
 
-        public string ConfigFolder {
-            get {
+        public string ConfigFolder
+        {
+            get
+            {
                 if (_ConfigFolder == null)
                 {
                     _ConfigFolder = Folder.Startup + "portable_config";
@@ -338,7 +360,8 @@ namespace mpvnet
 
                     if (!Directory.Exists(_ConfigFolder))
                     {
-                        try {
+                        try
+                        {
                             using (Process proc = new Process())
                             {
                                 proc.StartInfo.UseShellExecute = false;
@@ -348,7 +371,8 @@ namespace mpvnet
                                 proc.Start();
                                 proc.WaitForExit();
                             }
-                        } catch (Exception) {}
+                        }
+                        catch (Exception) { }
 
                         if (!Directory.Exists(_ConfigFolder))
                             Directory.CreateDirectory(_ConfigFolder);
@@ -371,6 +395,12 @@ namespace mpvnet
                             File.WriteAllText(scriptOptsPath + "osc.conf", content);
                         }
                     }
+                    if (!File.Exists(_ConfigFolder + "input.json"))
+                    {
+                        File.WriteAllText(_ConfigFolder + "input.json", Properties.Resources.input);
+
+
+                    }
                 }
 
                 return _ConfigFolder;
@@ -379,8 +409,10 @@ namespace mpvnet
 
         Dictionary<string, string> _Conf;
 
-        public Dictionary<string, string> Conf {
-            get {
+        public Dictionary<string, string> Conf
+        {
+            get
+            {
                 if (_Conf == null)
                 {
                     ApplyInputDefaultBindingsFix();
@@ -1121,9 +1153,9 @@ namespace mpvnet
 
                     switch (left)
                     {
-                        case "script":        left = "scripts";        break;
-                        case "audio-file":    left = "audio-files";    break;
-                        case "sub-file":      left = "sub-files";      break;
+                        case "script": left = "scripts"; break;
+                        case "audio-file": left = "audio-files"; break;
+                        case "sub-file": left = "sub-files"; break;
                         case "external-file": left = "external-files"; break;
                     }
 
@@ -1209,7 +1241,7 @@ namespace mpvnet
 
                 if (ext == "iso")
                     LoadISO(file);
-                else if(SubtitleTypes.Contains(ext))
+                else if (SubtitleTypes.Contains(ext))
                     CommandV("sub-add", file);
                 else if (!IsMediaExtension(ext) && !file.Contains("://") && Directory.Exists(file) &&
                     File.Exists(System.IO.Path.Combine(file, "BDMV\\index.bdmv")))
@@ -1422,7 +1454,7 @@ namespace mpvnet
         void HideLogo() => Command("overlay-remove 0");
 
         public bool IsImage => ImageTypes.Contains(Path.Ext());
-        
+
         public bool IsAudio => AudioTypes.Contains(Path.Ext());
 
         string GetLanguage(string id)
@@ -1474,9 +1506,9 @@ namespace mpvnet
         public void RaiseScaleWindow(float value) => ScaleWindow(value);
 
         public void RaiseMoveWindow(string value) => MoveWindow(value);
-        
+
         public void RaiseWindowScaleNET(float value) => WindowScaleNET(value);
-        
+
         public void RaiseShowMenu() => ShowMenu();
 
         public void UpdateTracks()
@@ -1496,7 +1528,8 @@ namespace mpvnet
             }
         }
 
-        public List<Chapter> GetChapters() {
+        public List<Chapter> GetChapters()
+        {
             List<Chapter> chapters = new List<Chapter>();
             int count = GetPropertyInt("chapter-list/count");
 
@@ -1517,7 +1550,7 @@ namespace mpvnet
         }
 
         public void UpdateExternalTracks()
-        { 
+        {
             int trackListTrackCount = GetPropertyInt("track-list/count");
             int editionCount = GetPropertyInt("edition-list/count");
             int count = MediaTracks.Where(i => i.Type != "g").Count();
@@ -1720,7 +1753,7 @@ namespace mpvnet
                         if (title.StartsWithEx(format + " "))
                             title = title.Replace(format + " ", "");
 
-                        foreach (string i2 in new [] { "2.0", "5.1", "6.1", "7.1" })
+                        foreach (string i2 in new[] { "2.0", "5.1", "6.1", "7.1" })
                             if (title.ContainsEx(i2))
                                 title = title.Replace(i2, "").Trim();
 

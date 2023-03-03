@@ -121,6 +121,9 @@
   <data name="editor_conf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\editor_conf.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="input" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\input.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="input_conf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\input.conf.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>

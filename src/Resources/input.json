@@ -1,0 +1,1432 @@
+﻿[
+  {
+    "Path": "Open \u003E Open Files...",
+    "Command": "script-message-to mpvnet open-files",
+    "Display": "Open \u003E Open Files...",
+    "Input": "o",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E Open URL or file from clipboard",
+    "Command": "script-message-to mpvnet open-clipboard",
+    "Display": "Open \u003E Open URL or file from clipboard",
+    "Input": "V",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E Open DVD/Blu-ray Drive/Folder...",
+    "Command": "script-message-to mpvnet open-optical-media",
+    "Display": "Open \u003E Open DVD/Blu-ray Drive/Folder...",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E -",
+    "Command": "",
+    "Display": "Open \u003E -",
+    "Input": "",
+    "Icon": "OpenInApp",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E Load external audio files...",
+    "Command": "script-message-to mpvnet load-audio",
+    "Display": "Open \u003E Load external audio files...",
+    "Input": "Alt\u002Ba",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E Load external subtitle files...",
+    "Command": "script-message-to mpvnet load-sub",
+    "Display": "Open \u003E Load external subtitle files...",
+    "Input": "Alt\u002Bs",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E -",
+    "Command": "",
+    "Display": "Open \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E Add files to playlist...",
+    "Command": "script-message-to mpvnet open-files append",
+    "Display": "Open \u003E Add files to playlist...",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E -",
+    "Command": "",
+    "Display": "Open \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Open \u003E Recent",
+    "Command": "",
+    "Display": "Open \u003E Recent",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "-",
+    "Command": "",
+    "Display": "-",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Play/Pause",
+    "Command": "script-message-to mpvnet play-pause",
+    "Display": "Play/Pause",
+    "Input": "Space",
+    "Alias": null
+  },
+  {
+    "Path": "Stop",
+    "Command": "stop",
+    "Display": "Stop",
+    "Input": "Ctrl\u002Bs",
+    "Alias": null
+  },
+  {
+    "Path": "-",
+    "Command": "",
+    "Display": "-",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Toggle Fullscreen",
+    "Command": "cycle fullscreen",
+    "Display": "Toggle Fullscreen",
+    "Input": "Enter",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Previous File",
+    "Command": "script-message-to mpvnet playlist-add -1",
+    "Display": "Navigate \u003E Previous File",
+    "Input": "F11",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Next File",
+    "Command": "script-message-to mpvnet playlist-add  1",
+    "Display": "Navigate \u003E Next File",
+    "Input": "F12",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Icon": "ChevronRight",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E First File",
+    "Command": "script-message-to mpvnet playlist-first",
+    "Display": "Navigate \u003E First File",
+    "Input": "Home",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Last File",
+    "Command": "script-message-to mpvnet playlist-last",
+    "Display": "Navigate \u003E Last File",
+    "Input": "End",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Random File",
+    "Command": "script-message-to mpvnet playlist-random",
+    "Display": "Navigate \u003E Random File",
+    "Input": "F9",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Next Chapter",
+    "Command": "add chapter  1",
+    "Display": "Navigate \u003E Next Chapter",
+    "Input": "PGUP",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Previous Chapter",
+    "Command": "add chapter -1",
+    "Display": "Navigate \u003E Previous Chapter",
+    "Input": "PGDWN",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump Next Frame",
+    "Command": "frame-step",
+    "Display": "Navigate \u003E Jump Next Frame",
+    "Input": ".",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump Previous Frame",
+    "Command": "frame-back-step",
+    "Display": "Navigate \u003E Jump Previous Frame",
+    "Input": ",",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump 5 sec forward",
+    "Command": "seek  5",
+    "Display": "Navigate \u003E Jump 5 sec forward",
+    "Input": "Right",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump 5 sec backward",
+    "Command": "seek -5",
+    "Display": "Navigate \u003E Jump 5 sec backward",
+    "Input": "Left",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump 30 sec forward",
+    "Command": "seek  30",
+    "Display": "Navigate \u003E Jump 30 sec forward",
+    "Input": "Up",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump 30 sec backward",
+    "Command": "seek -30",
+    "Display": "Navigate \u003E Jump 30 sec backward",
+    "Input": "Down",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump 5 min forward",
+    "Command": "seek  300",
+    "Display": "Navigate \u003E Jump 5 min forward",
+    "Input": "Ctrl\u002BRight",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Jump 5 min backward",
+    "Command": "seek -300",
+    "Display": "Navigate \u003E Jump 5 min backward",
+    "Input": "Ctrl\u002BLeft",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E -",
+    "Command": "",
+    "Display": "Navigate \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Titles",
+    "Command": "",
+    "Display": "Navigate \u003E Titles",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Navigate \u003E Chapters",
+    "Command": "",
+    "Display": "Navigate \u003E Chapters",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Increase Size",
+    "Command": "add video-zoom  0.1",
+    "Display": "Pan \u0026 Scan \u003E Increase Size",
+    "Input": "Ctrl\u002B\u002B",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Decrease Size",
+    "Command": "add video-zoom -0.1",
+    "Display": "Pan \u0026 Scan \u003E Decrease Size",
+    "Input": "Ctrl\u002B-",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E -",
+    "Command": "",
+    "Display": "Pan \u0026 Scan \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Move Left",
+    "Command": "add video-pan-x -0.01",
+    "Display": "Pan \u0026 Scan \u003E Move Left",
+    "Input": "Ctrl\u002BKP4",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Move Right",
+    "Command": "add video-pan-x  0.01",
+    "Display": "Pan \u0026 Scan \u003E Move Right",
+    "Input": "Ctrl\u002BKP6",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E -",
+    "Command": "",
+    "Display": "Pan \u0026 Scan \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Move Up",
+    "Command": "add video-pan-y -0.01",
+    "Display": "Pan \u0026 Scan \u003E Move Up",
+    "Input": "Ctrl\u002BKP8",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Move Down",
+    "Command": "add video-pan-y  0.01",
+    "Display": "Pan \u0026 Scan \u003E Move Down",
+    "Input": "Ctrl\u002BKP2",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E -",
+    "Command": "",
+    "Display": "Pan \u0026 Scan \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Decrease Height",
+    "Command": "add panscan -0.1",
+    "Display": "Pan \u0026 Scan \u003E Decrease Height",
+    "Input": "w",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Increase Height",
+    "Command": "add panscan  0.1",
+    "Display": "Pan \u0026 Scan \u003E Increase Height",
+    "Input": "W",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E -",
+    "Command": "",
+    "Display": "Pan \u0026 Scan \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Pan \u0026 Scan \u003E Reset",
+    "Command": "set video-zoom 0; set video-pan-x 0; set video-pan-y 0",
+    "Display": "Pan \u0026 Scan \u003E Reset",
+    "Input": "Ctrl\u002BBS",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Decrease Contrast",
+    "Command": "add contrast -1",
+    "Display": "Video \u003E Decrease Contrast",
+    "Input": "Ctrl\u002B1",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Increase Contrast",
+    "Command": "add contrast  1",
+    "Display": "Video \u003E Increase Contrast",
+    "Input": "Ctrl\u002B2",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E -",
+    "Command": "",
+    "Display": "Video \u003E -",
+    "Input": "",
+    "Icon": "VideoVintage",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Decrease Brightness",
+    "Command": "add brightness -1",
+    "Display": "Video \u003E Decrease Brightness",
+    "Input": "Ctrl\u002B3",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Increase Brightness",
+    "Command": "add brightness  1",
+    "Display": "Video \u003E Increase Brightness",
+    "Input": "Ctrl\u002B4",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E -",
+    "Command": "",
+    "Display": "Video \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Decrease Gamma",
+    "Command": "add gamma -1",
+    "Display": "Video \u003E Decrease Gamma",
+    "Input": "Ctrl\u002B5",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Increase Gamma",
+    "Command": "add gamma  1",
+    "Display": "Video \u003E Increase Gamma",
+    "Input": "Ctrl\u002B6",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E -",
+    "Command": "",
+    "Display": "Video \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Decrease Saturation",
+    "Command": "add saturation -1",
+    "Display": "Video \u003E Decrease Saturation",
+    "Input": "Ctrl\u002B7",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Increase Saturation",
+    "Command": "add saturation  1",
+    "Display": "Video \u003E Increase Saturation",
+    "Input": "Ctrl\u002B8",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E -",
+    "Command": "",
+    "Display": "Video \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Take Screenshot",
+    "Command": "async screenshot",
+    "Display": "Video \u003E Take Screenshot",
+    "Input": "s",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Take Screenshot without subtitles",
+    "Command": "async screenshot video",
+    "Display": "Video \u003E Take Screenshot without subtitles",
+    "Input": "S",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Toggle Deinterlace",
+    "Command": "cycle deinterlace",
+    "Display": "Video \u003E Toggle Deinterlace",
+    "Input": "d",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Cycle Aspect Ratio",
+    "Command": "cycle-values video-aspect 16:9 4:3 2.35:1 -1",
+    "Display": "Video \u003E Cycle Aspect Ratio",
+    "Input": "a",
+    "Alias": null
+  },
+  {
+    "Path": "Video \u003E Rotate Video",
+    "Command": "cycle-values video-rotate 90 180 270 0",
+    "Display": "Video \u003E Rotate Video",
+    "Input": "Ctrl\u002Br",
+    "Alias": null
+  },
+  {
+    "Path": "Audio \u003E Cycle/Next",
+    "Command": "script-message-to mpvnet cycle-audio",
+    "Display": "Audio \u003E Cycle/Next",
+    "Input": "KP7",
+    "Alias": null
+  },
+  {
+    "Path": "Audio \u003E -",
+    "Command": "",
+    "Display": "Audio \u003E -",
+    "Icon": "SurroundSound",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Audio \u003E Delay \u002B0.1",
+    "Command": "add audio-delay  0.1",
+    "Display": "Audio \u003E Delay \u002B0.1",
+    "Input": "Ctrl\u002Bd",
+    "Alias": null
+  },
+  {
+    "Path": "Audio \u003E Delay -0.1",
+    "Command": "add audio-delay -0.1",
+    "Display": "Audio \u003E Delay -0.1",
+    "Input": "Ctrl\u002BD",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Cycle/Next #menu: Subtitle \u003E Cycle/Next",
+    "Command": "script-message-to mpvnet cycle-subtitles",
+    "Display": "Subtitle \u003E Cycle/Next #menu: Subtitle \u003E Cycle/Next",
+    "Input": "KP8",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Toggle Visibility",
+    "Command": "cycle sub-visibility",
+    "Display": "Subtitle \u003E Toggle Visibility",
+    "Input": "v",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E -",
+    "Command": "",
+    "Display": "Subtitle \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Delay -0.1",
+    "Command": "add sub-delay -0.1",
+    "Display": "Subtitle \u003E Delay -0.1",
+    "Input": "z",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Delay \u002B0.1",
+    "Command": "add sub-delay  0.1",
+    "Display": "Subtitle \u003E Delay \u002B0.1",
+    "Input": "Z",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E -",
+    "Command": "",
+    "Display": "Subtitle \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Move Up",
+    "Command": "add sub-pos -1",
+    "Display": "Subtitle \u003E Move Up",
+    "Input": "r",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Move Down",
+    "Command": "add sub-pos \u002B1",
+    "Display": "Subtitle \u003E Move Down",
+    "Input": "R",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E -",
+    "Command": "",
+    "Display": "Subtitle \u003E -",
+    "Icon": "SubtitlesOutline",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Decrease Subtitle Font Size",
+    "Command": "add sub-scale -0.1",
+    "Display": "Subtitle \u003E Decrease Subtitle Font Size",
+    "Input": "F",
+    "Alias": null
+  },
+  {
+    "Path": "Subtitle \u003E Increase Subtitle Font Size",
+    "Command": "add sub-scale  0.1",
+    "Display": "Subtitle \u003E Increase Subtitle Font Size",
+    "Input": "G",
+    "Alias": null
+  },
+  {
+    "Path": "Track",
+    "Command": "",
+    "Display": "Track",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Volume \u003E Up",
+    "Command": "add volume  2",
+    "Display": "Volume \u003E Up",
+    "Input": "\u002B",
+    "Alias": null
+  },
+  {
+    "Path": "Volume \u003E Down",
+    "Command": "add volume -2",
+    "Display": "Volume \u003E Down",
+    "Input": "-",
+    "Alias": null
+  },
+  {
+    "Path": "Volume \u003E Up",
+    "Command": "add volume  2",
+    "Display": "Volume \u003E Up",
+    "Input": "0",
+    "Alias": null
+  },
+  {
+    "Path": "Volume \u003E Down",
+    "Command": "add volume -2",
+    "Display": "Volume \u003E Down",
+    "Input": "9",
+    "Alias": null
+  },
+  {
+    "Path": "Volume \u003E -",
+    "Command": "",
+    "Display": "Volume \u003E -",
+    "Icon": "VolumeHigh",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Volume \u003E Mute",
+    "Command": "cycle mute",
+    "Display": "Volume \u003E Mute",
+    "Input": "m",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E -10%",
+    "Command": "multiply speed 1/1.1",
+    "Display": "Speed \u003E -10%",
+    "Input": "[",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E \u002B10%",
+    "Command": "multiply speed 1.1",
+    "Display": "Speed \u003E \u002B10%",
+    "Input": "]",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E -",
+    "Command": "",
+    "Display": "Speed \u003E -",
+    "Icon": "PlaySpeed",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E Half",
+    "Command": "multiply speed 0.5",
+    "Display": "Speed \u003E Half",
+    "Input": "{",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E Double",
+    "Command": "multiply speed 2.0",
+    "Display": "Speed \u003E Double",
+    "Input": "}",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E -",
+    "Command": "",
+    "Display": "Speed \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Speed \u003E Reset",
+    "Command": "set speed 1",
+    "Display": "Speed \u003E Reset",
+    "Input": "BS",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E Enlarge",
+    "Command": "script-message-to mpvnet scale-window 1.2",
+    "Display": "View \u003E Zoom \u003E Enlarge",
+    "Input": "Alt\u002B\u002B",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E Shrink",
+    "Command": "script-message-to mpvnet scale-window 0.8",
+    "Display": "View \u003E Zoom \u003E Shrink",
+    "Input": "Alt\u002B-",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E -",
+    "Command": "",
+    "Display": "View \u003E Zoom \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E 50 %",
+    "Command": "script-message-to mpvnet window-scale 0.5",
+    "Display": "View \u003E Zoom \u003E 50 %",
+    "Input": "Alt\u002B0",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E 100 %",
+    "Command": "script-message-to mpvnet window-scale 1.0",
+    "Display": "View \u003E Zoom \u003E 100 %",
+    "Input": "Alt\u002B1",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E 200 %",
+    "Command": "script-message-to mpvnet window-scale 2.0",
+    "Display": "View \u003E Zoom \u003E 200 %",
+    "Input": "Alt\u002B2",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Zoom \u003E 300 %",
+    "Command": "script-message-to mpvnet window-scale 3.0",
+    "Display": "View \u003E Zoom \u003E 300 %",
+    "Input": "Alt\u002B3",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Move \u003E Left",
+    "Command": "script-message-to mpvnet move-window left",
+    "Display": "View \u003E Move \u003E Left",
+    "Input": "Alt\u002BLeft",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Move \u003E Right",
+    "Command": "script-message-to mpvnet move-window right",
+    "Display": "View \u003E Move \u003E Right",
+    "Input": "Alt\u002BRight",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Move \u003E Top",
+    "Command": "script-message-to mpvnet move-window top",
+    "Display": "View \u003E Move \u003E Top",
+    "Input": "Alt\u002BUp",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Move \u003E Bottom",
+    "Command": "script-message-to mpvnet move-window bottom",
+    "Display": "View \u003E Move \u003E Bottom",
+    "Input": "Alt\u002BDown",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Move \u003E Center",
+    "Command": "script-message-to mpvnet move-window center",
+    "Display": "View \u003E Move \u003E Center",
+    "Input": "Alt\u002BBS",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Playlist",
+    "Command": "script-message-to mpvnet show-playlist",
+    "Display": "View \u003E Show Playlist",
+    "Input": "F8",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Profile Selection",
+    "Command": "script-message-to mpvnet select-profile",
+    "Display": "View \u003E Show Profile Selection",
+    "Input": "Ctrl\u002Bp",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Profiles",
+    "Command": "script-message-to mpvnet show-profiles",
+    "Display": "View \u003E Show Profiles",
+    "Input": "Ctrl\u002BP",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Audio Tracks",
+    "Command": "script-message-to mpvnet show-audio-tracks",
+    "Display": "View \u003E Show Audio Tracks",
+    "Input": "Ctrl\u002B7",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Subtitle Tracks",
+    "Command": "script-message-to mpvnet show-subtitle-tracks",
+    "Display": "View \u003E Show Subtitle Tracks",
+    "Input": "Ctrl\u002B8",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Chapters",
+    "Command": "script-message-to mpvnet show-chapters",
+    "Display": "View \u003E Show Chapters",
+    "Input": "Ctrl\u002Bc",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Toggle Border",
+    "Command": "cycle border",
+    "Display": "View \u003E Toggle Border",
+    "Input": "b",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Toggle On Top",
+    "Command": "cycle ontop",
+    "Display": "View \u003E Toggle On Top",
+    "Input": "Ctrl\u002Bt",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Toggle Statistics",
+    "Command": "script-binding stats/display-stats-toggle",
+    "Display": "View \u003E Toggle Statistics",
+    "Input": "t",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Toggle OSC Visibility",
+    "Command": "script-binding osc/visibility",
+    "Display": "View \u003E Toggle OSC Visibility",
+    "Input": "Del",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Media Info",
+    "Command": "script-message-to mpvnet show-info",
+    "Display": "View \u003E Show Media Info",
+    "Input": "i",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Media Info Advanced",
+    "Command": "script-message-to mpvnet show-media-info",
+    "Display": "View \u003E Show Media Info Advanced",
+    "Input": "Ctrl\u002Bm",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Progress",
+    "Command": "show-progress",
+    "Display": "View \u003E Show Progress",
+    "Input": "p",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Show Recent",
+    "Command": "script-message-to mpvnet show-recent",
+    "Display": "View \u003E Show Recent",
+    "Input": "Alt\u002Br",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Console",
+    "Command": "script-binding console/enable",
+    "Display": "View \u003E Advanced \u003E Show Console",
+    "Input": "\u0060",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Audio Devices",
+    "Command": "script-message-to mpvnet show-audio-devices",
+    "Display": "View \u003E Advanced \u003E Show Audio Devices",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Properties",
+    "Command": "script-message-to mpvnet show-properties",
+    "Display": "View \u003E Advanced \u003E Show Properties",
+    "Input": "P",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Commands",
+    "Command": "script-message-to mpvnet show-commands",
+    "Display": "View \u003E Advanced \u003E Show Commands",
+    "Input": "C",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Demuxers",
+    "Command": "script-message-to mpvnet show-demuxers",
+    "Display": "View \u003E Advanced \u003E Show Demuxers",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Decoders",
+    "Command": "script-message-to mpvnet show-decoders",
+    "Display": "View \u003E Advanced \u003E Show Decoders",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Protocols",
+    "Command": "script-message-to mpvnet show-protocols",
+    "Display": "View \u003E Advanced \u003E Show Protocols",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "View \u003E Advanced \u003E Show Keys",
+    "Command": "script-message-to mpvnet show-keys",
+    "Display": "View \u003E Advanced \u003E Show Keys",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Profile",
+    "Command": "",
+    "Display": "Profile",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E -",
+    "Command": "",
+    "Display": "Settings \u003E -",
+    "Icon": "Tune",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Show Config Editor",
+    "Command": "script-message-to mpvnet show-conf-editor",
+    "Display": "Settings \u003E Show Config Editor",
+    "Icon": "PuzzleEditOutline",
+    "Input": "c",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Show Input Editor",
+    "Command": "script-message-to mpvnet show-input-editor",
+    "Display": "Settings \u003E Show Input Editor",
+    "Input": "Ctrl\u002Bi",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Open Config Folder",
+    "Command": "script-message-to mpvnet open-conf-folder",
+    "Display": "Settings \u003E Open Config Folder",
+    "Input": "Ctrl\u002Bf",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Setup \u003E Register video file associations",
+    "Command": "script-message-to mpvnet reg-file-assoc video",
+    "Display": "Settings \u003E Setup \u003E Register video file associations",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Setup \u003E Register audio file associations",
+    "Command": "script-message-to mpvnet reg-file-assoc audio",
+    "Display": "Settings \u003E Setup \u003E Register audio file associations",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Setup \u003E Register image file associations",
+    "Command": "script-message-to mpvnet reg-file-assoc image",
+    "Display": "Settings \u003E Setup \u003E Register image file associations",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Settings \u003E Setup \u003E Unregister file associations",
+    "Command": "script-message-to mpvnet reg-file-assoc unreg",
+    "Display": "Settings \u003E Setup \u003E Unregister file associations",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Show History",
+    "Command": "script-message-to mpvnet show-history",
+    "Display": "Tools \u003E Show History",
+    "Input": "h",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Set/clear A-B loop points",
+    "Command": "ab-loop",
+    "Display": "Tools \u003E Set/clear A-B loop points",
+    "Input": "l",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Toggle infinite file looping",
+    "Command": "cycle-values loop-file inf no",
+    "Display": "Tools \u003E Toggle infinite file looping",
+    "Input": "L",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Shuffle Playlist",
+    "Command": "playlist-shuffle",
+    "Display": "Tools \u003E Shuffle Playlist",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Toggle Hardware Decoding",
+    "Command": "cycle-values hwdec auto no",
+    "Display": "Tools \u003E Toggle Hardware Decoding",
+    "Input": "Ctrl\u002Bh",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Exit Watch Later",
+    "Command": "quit-watch-later",
+    "Display": "Tools \u003E Exit Watch Later",
+    "Input": "Q",
+    "Alias": null
+  },
+  {
+    "Path": "Tools \u003E Show current file in File Explorer",
+    "Command": "run powershell -command \u0022explorer.exe \u0027/select,\u0027 ( \\\u0022${path}\\\u0022 -replace \u0027/\u0027, \u0027\\\\\u0027 )\u0022",
+    "Display": "Tools \u003E Show current file in File Explorer",
+    "Input": "e",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E Website mpv",
+    "Command": "script-message-to mpvnet shell-execute https://mpv.io",
+    "Display": "Help \u003E Website mpv",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E Website mpv.net",
+    "Command": "script-message-to mpvnet shell-execute https://github.com/mpvnet-player/mpv.net",
+    "Display": "Help \u003E Website mpv.net",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E -",
+    "Command": "",
+    "Display": "Help \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E Manual mpv",
+    "Command": "script-message-to mpvnet shell-execute https://mpv.io/manual/stable/",
+    "Display": "Help \u003E Manual mpv",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E Manual mpv.net",
+    "Command": "script-message-to mpvnet shell-execute https://github.com/mpvnet-player/mpv.net/blob/master/docs/Manual.md",
+    "Display": "Help \u003E Manual mpv.net",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E -",
+    "Command": "",
+    "Display": "Help \u003E -",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Help \u003E About mpv.net",
+    "Command": "script-message-to mpvnet show-about",
+    "Display": "Help \u003E About mpv.net",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Command Palette",
+    "Command": "script-message-to mpvnet show-command-palette",
+    "Display": "Command Palette",
+    "Input": "F1",
+    "Alias": null
+  },
+  {
+    "Path": "-",
+    "Command": "",
+    "Display": "-",
+    "Input": "",
+    "Alias": null
+  },
+  {
+    "Path": "Exit",
+    "Command": "quit",
+    "Display": "Exit",
+    "Input": "Esc",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet show-menu",
+    "Display": "script-message-to mpvnet show-menu",
+    "Input": "MBTN_Right",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet show-progress",
+    "Display": "script-message-to mpvnet show-progress",
+    "Input": "6",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet show-progress",
+    "Display": "script-message-to mpvnet show-progress",
+    "Input": "KP6",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "ab-loop",
+    "Display": "ab-loop",
+    "Input": "KP9",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet cycle-audio",
+    "Display": "script-message-to mpvnet cycle-audio",
+    "Input": "7",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet cycle-audio",
+    "Display": "script-message-to mpvnet cycle-audio",
+    "Input": "Sharp",
+    "Alias": "#"
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet playlist-add -10",
+    "Display": "script-message-to mpvnet playlist-add -10",
+    "Input": "Ctrl\u002BF11",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet playlist-add  10",
+    "Display": "script-message-to mpvnet playlist-add  10",
+    "Input": "Ctrl\u002BF12",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet quick-bookmark",
+    "Display": "script-message-to mpvnet quick-bookmark",
+    "Input": "Alt\u002Bq",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet cycle-subtitles",
+    "Display": "script-message-to mpvnet cycle-subtitles",
+    "Input": "8",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "script-message-to mpvnet cycle-subtitles",
+    "Display": "script-message-to mpvnet cycle-subtitles",
+    "Input": "j",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "quit",
+    "Display": "quit",
+    "Input": "q",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "quit",
+    "Display": "quit",
+    "Input": "Power",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle pause",
+    "Display": "cycle pause",
+    "Input": "Play",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle pause",
+    "Display": "cycle pause",
+    "Input": "Pause",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle pause",
+    "Display": "cycle pause",
+    "Input": "PlayPause",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle pause",
+    "Display": "cycle pause",
+    "Input": "MBTN_Mid",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "stop",
+    "Display": "stop",
+    "Input": "Stop",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "seek  60",
+    "Display": "seek  60",
+    "Input": "Forward",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "seek -60",
+    "Display": "seek -60",
+    "Input": "Rewind",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "add volume  2",
+    "Display": "add volume  2",
+    "Input": "Wheel_Up",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "add volume -2",
+    "Display": "add volume -2",
+    "Input": "Wheel_Down",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "add volume -2",
+    "Display": "add volume -2",
+    "Input": "Wheel_Left",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "add volume  2",
+    "Display": "add volume  2",
+    "Input": "Wheel_Right",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "playlist-prev",
+    "Display": "playlist-prev",
+    "Input": "Prev",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "playlist-next",
+    "Display": "playlist-next",
+    "Input": "Next",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "playlist-next",
+    "Display": "playlist-next",
+    "Input": "MBTN_Forward",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "playlist-prev",
+    "Display": "playlist-prev",
+    "Input": "MBTN_Back",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "playlist-next",
+    "Display": "playlist-next",
+    "Input": "\u003E",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "playlist-prev",
+    "Display": "playlist-prev",
+    "Input": "\u003C",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "",
+    "Display": "",
+    "Input": "MBTN_Left",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle fullscreen",
+    "Display": "cycle fullscreen",
+    "Input": "f",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle fullscreen",
+    "Display": "cycle fullscreen",
+    "Input": "MBTN_Left_DBL",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "cycle fullscreen",
+    "Display": "cycle fullscreen",
+    "Input": "KP_Enter",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd seek  1 exact",
+    "Display": "no-osd seek  1 exact",
+    "Input": "Shift\u002BRight",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd seek -1 exact",
+    "Display": "no-osd seek -1 exact",
+    "Input": "Shift\u002BLeft",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd seek  5 exact",
+    "Display": "no-osd seek  5 exact",
+    "Input": "Shift\u002BUp",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd seek -5 exact",
+    "Display": "no-osd seek -5 exact",
+    "Input": "Shift\u002BDown",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "revert-seek      # undo the previous (or marked) seek",
+    "Display": "revert-seek      # undo the previous (or marked...",
+    "Input": "Shift\u002BBS",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "revert-seek mark # mark the position for revert-seek",
+    "Display": "revert-seek mark # mark the position for revert...",
+    "Input": "Shift\u002BCtrl\u002BBS",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd sub-seek -1 # seek to the previous subtitle",
+    "Display": "no-osd sub-seek -1 # seek to the previous subti...",
+    "Input": "Ctrl\u002BShift\u002BLeft",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd sub-seek  1 # seek to the next subtitle",
+    "Display": "no-osd sub-seek  1 # seek to the next subtitle",
+    "Input": "Ctrl\u002BShift\u002BRight",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd seek  7",
+    "Display": "no-osd seek  7",
+    "Input": "Ctrl\u002BWheel_Up",
+    "Alias": null
+  },
+  {
+    "Path": "",
+    "Command": "no-osd seek -7",
+    "Display": "no-osd seek -7",
+    "Input": "Ctrl\u002BWheel_Down",
+    "Alias": null
+  }
+]

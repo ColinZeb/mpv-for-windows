@@ -19,10 +19,12 @@ namespace mpvnet
 {
     public class Sys
     {
-        public static bool IsDarkTheme {
-            get {
+        public static bool IsDarkTheme
+        {
+            get
+            {
                 object value = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize", "AppsUseLightTheme", 1);
-            
+
                 if (value is null)
                     value = 1;
 
@@ -48,9 +50,9 @@ namespace mpvnet
         {
             switch (value)
             {
-                case 5:  return "SEARCH";       // BROWSER_SEARCH
-                case 6:  return "FAVORITES";    // BROWSER_FAVORITES
-                case 7:  return "HOMEPAGE";     // BROWSER_HOME
+                case 5: return "SEARCH";       // BROWSER_SEARCH
+                case 6: return "FAVORITES";    // BROWSER_FAVORITES
+                case 7: return "HOMEPAGE";     // BROWSER_HOME
                 case 15: return "MAIL";         // LAUNCH_MAIL
                 case 33: return "PRINT";        // PRINT
                 case 11: return "NEXT";         // MEDIA_NEXTTRACK
@@ -117,7 +119,7 @@ namespace mpvnet
                 RegistryHelp.RemoveKey(@"HKLM\SOFTWARE\Clients\Media\mpv.net");
                 RegistryHelp.RemoveKey(@"HKCR\SystemFileAssociations\video\OpenWithList\" + ExeFilename);
                 RegistryHelp.RemoveKey(@"HKCR\SystemFileAssociations\audio\OpenWithList\" + ExeFilename);
-           
+
                 RegistryHelp.RemoveValue(@"HKLM\SOFTWARE\RegisteredApplications", "mpv.net");
 
                 foreach (string id in Registry.ClassesRoot.GetSubKeyNames())
@@ -143,12 +145,14 @@ namespace mpvnet
     public class CommandItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        public string Icon { get; set; }
         public string Path { get; set; } = "";
         public string Command { get; set; } = "";
 
-        public string Display {
-            get {
+        public string Display
+        {
+            get
+            {
                 if (string.IsNullOrEmpty(Path))
                 {
                     if (Command.Length > 47)
@@ -157,7 +161,7 @@ namespace mpvnet
                 }
                 else
                     return Path;
-            } 
+            }
         }
 
         public CommandItem() { }
@@ -171,16 +175,20 @@ namespace mpvnet
 
         string _Input = "";
 
-        public string Input {
+        public string Input
+        {
             get => _Input;
-            set {
+            set
+            {
                 _Input = value;
                 NotifyPropertyChanged();
             }
         }
 
-        public string Alias {
-            get {
+        public string Alias
+        {
+            get
+            {
                 if (Input.Contains("SHARP") || Input.Contains("sharp") || Input.Contains("Sharp"))
                     return "#";
                 return null;
@@ -236,8 +244,10 @@ namespace mpvnet
 
         static ObservableCollection<CommandItem> _Items;
 
-        public static ObservableCollection<CommandItem> Items {
-            get {
+        public static ObservableCollection<CommandItem> Items
+        {
+            get
+            {
                 if (_Items is null)
                     _Items = GetItems(File.ReadAllText(Core.InputConfPath));
                 return _Items;
@@ -253,7 +263,7 @@ namespace mpvnet
 
     public class CommandPaletteItem
     {
-        public CommandPaletteItem() {}
+        public CommandPaletteItem() { }
 
         public CommandPaletteItem(string text, Action action)
         {
@@ -282,7 +292,8 @@ namespace mpvnet
         {
             return CommandItem.Items
                 .Where(i => i.Command != "")
-                .Select(i => new CommandPaletteItem() {
+                .Select(i => new CommandPaletteItem()
+                {
                     Text = i.Display,
                     SecondaryText = i.Input,
                     Action = () => Core.Command(i.Command),
@@ -298,8 +309,10 @@ namespace mpvnet
 
         string _TimeDisplay;
 
-        public string TimeDisplay {
-            get {
+        public string TimeDisplay
+        {
+            get
+            {
                 if (_TimeDisplay == null)
                 {
                     _TimeDisplay = TimeSpan.FromSeconds(Time).ToString();

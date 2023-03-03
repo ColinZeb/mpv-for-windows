@@ -15,6 +15,8 @@ using WpfControls = System.Windows.Controls;
 
 using static mpvnet.Native;
 using static mpvnet.Global;
+using System.Collections.ObjectModel;
+using MaterialDesignThemes.Wpf;
 
 namespace mpvnet
 {
@@ -95,9 +97,9 @@ namespace mpvnet
                     Point location = App.Settings.WindowLocation;
 
                     if (location.X == -1) Left = pos.X;
-                    if (location.X ==  1) Left = pos.X - Width;
+                    if (location.X == 1) Left = pos.X - Width;
                     if (location.Y == -1) Top = pos.Y;
-                    if (location.Y ==  1) Top = pos.Y - Height;
+                    if (location.Y == 1) Top = pos.Y - Height;
                 }
 
                 if (Core.WindowMaximized)
@@ -120,7 +122,8 @@ namespace mpvnet
 
         void Core_MoveWindow(string direction)
         {
-            BeginInvoke(new Action(() => {
+            BeginInvoke(new Action(() =>
+            {
                 Screen screen = Screen.FromControl(this);
                 Rectangle workingArea = GetWorkingArea(Handle, screen.WorkingArea);
 
@@ -178,7 +181,8 @@ namespace mpvnet
 
         void Core_ShowMenu()
         {
-            BeginInvoke(new Action(() => {
+            BeginInvoke(new Action(() =>
+            {
                 if (IsMouseInOSC())
                     return;
 
@@ -188,8 +192,10 @@ namespace mpvnet
             }));
         }
 
-        void Core_ScaleWindow(float scale) {
-            BeginInvoke(new Action(() => {
+        void Core_ScaleWindow(float scale)
+        {
+            BeginInvoke(new Action(() =>
+            {
                 int w, h;
 
                 if (KeepSize())
@@ -209,7 +215,8 @@ namespace mpvnet
 
         void Core_WindowScaleNET(float scale)
         {
-            BeginInvoke(new Action(() => {
+            BeginInvoke(new Action(() =>
+            {
                 SetSize(
                     (int)(Core.VideoSize.Width * scale),
                     (int)Math.Ceiling(Core.VideoSize.Height * scale),
@@ -223,7 +230,8 @@ namespace mpvnet
             if (!Core.Shown)
                 return;
 
-            BeginInvoke(new Action(() => {
+            BeginInvoke(new Action(() =>
+            {
                 SetSize(
                     (int)(Core.VideoSize.Width * scale),
                     (int)Math.Ceiling(Core.VideoSize.Height * scale),
@@ -373,7 +381,7 @@ namespace mpvnet
 
                 lock (Core.BluRayTitles)
                 {
-                    List<(int Index, TimeSpan Length)> items = new List<(int, TimeSpan)>(); 
+                    List<(int Index, TimeSpan Length)> items = new List<(int, TimeSpan)>();
 
                     for (int i = 0; i < Core.BluRayTitles.Count; i++)
                         items.Add((i, Core.BluRayTitles[i]));
@@ -412,7 +420,8 @@ namespace mpvnet
 
                         if (mi != null)
                         {
-                            mi.Click += (sender, args) => {
+                            mi.Click += (sender, args) =>
+                            {
                                 Core.CommandV("show-text", profile);
                                 Core.CommandV("apply-profile", profile);
                             };
@@ -480,7 +489,7 @@ namespace mpvnet
             Size videoSize = Core.VideoSize;
 
             int height = videoSize.Height;
-            int width  = videoSize.Width;
+            int width = videoSize.Width;
 
             if (App.StartSize == "previous")
                 App.StartSize = "height-session";
@@ -517,7 +526,7 @@ namespace mpvnet
                     height = autoFitHeight;
                     width = height * videoSize.Width / videoSize.Height;
                 }
-                else if(App.StartSize == "width-always" && windowSize.Height != 0)
+                else if (App.StartSize == "width-always" && windowSize.Height != 0)
                 {
                     width = windowSize.Width;
                     height = (int)Math.Ceiling(width * videoSize.Height / (double)videoSize.Width);
@@ -592,16 +601,16 @@ namespace mpvnet
             Rectangle currentRect = new Rectangle(Left, Top, Width, Height);
 
             if (GetHorizontalLocation(screen) == -1) left = Left;
-            if (GetHorizontalLocation(screen) ==  1) left = currentRect.Right - rect.Width;
+            if (GetHorizontalLocation(screen) == 1) left = currentRect.Right - rect.Width;
 
             if (GetVerticalLocation(screen) == -1) top = Top;
-            if (GetVerticalLocation(screen) ==  1) top = currentRect.Bottom - rect.Height;
+            if (GetVerticalLocation(screen) == 1) top = currentRect.Bottom - rect.Height;
 
             Screen[] screens = Screen.AllScreens;
 
-            int minLeft   = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).X).Min();
-            int maxRight  = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).Right).Max();
-            int minTop    = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).Y).Min();
+            int minLeft = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).X).Min();
+            int maxRight = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).Right).Max();
+            int minTop = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).Y).Min();
             int maxBottom = screens.Select(val => GetWorkingArea(Handle, val.WorkingArea).Bottom).Max();
 
             if (left < minLeft)
@@ -636,7 +645,7 @@ namespace mpvnet
                     {
                         Rectangle bounds = Screen.FromControl(this).Bounds;
                         uint SWP_SHOWWINDOW = 0x0040;
-                        IntPtr HWND_TOP= IntPtr.Zero;
+                        IntPtr HWND_TOP = IntPtr.Zero;
                         SetWindowPos(Handle, HWND_TOP, bounds.X, bounds.Y, bounds.Width, bounds.Height, SWP_SHOWWINDOW);
                     }
                 }
@@ -650,7 +659,7 @@ namespace mpvnet
                     else
                     {
                         WindowState = FormWindowState.Normal;
-                        
+
                         if (!Core.WasInitialSizeSet)
                             SetFormPosAndSize();
                     }
@@ -702,8 +711,10 @@ namespace mpvnet
 
         public void BuildMenu()
         {
-            var items = CommandItem.GetItems(Core.InputConfContent);
-
+            //var items = CommandItem.GetItems(Core.InputConfContent);
+            var items = System.Text.Json.JsonSerializer.Deserialize<ObservableCollection<CommandItem>>(Core.InputJsonContent);
+            //var check = items.Where(c => c.Icon != null);
+            //var jsonConfig = System.Text.Json.JsonSerializer.Serialize(items);
             if (!Core.InputConfContent.Contains("#menu:"))
             {
                 var defaultItems = CommandItem.GetItems(Properties.Resources.input_conf);
@@ -730,25 +741,30 @@ namespace mpvnet
                 }
                 else
                 {
-                    var menuItem = MenuHelp.Add(ContextMenu.Items, tempItem.Path);             
+                    var menuItem = MenuHelp.Add(ContextMenu.Items, tempItem.Path, tempItem.Icon);
 
                     if (menuItem != null)
                     {
                         MenuItemDuplicate[tempItem.Path] = menuItem;
-                        menuItem.Click += (sender, args) => {
-                            try {
-                                App.RunTask(() => {
+                        menuItem.Click += (sender, args) =>
+                        {
+                            try
+                            {
+                                App.RunTask(() =>
+                                {
                                     MenuAutoResetEvent.WaitOne();
                                     System.Windows.Application.Current.Dispatcher.Invoke(
                                         DispatcherPriority.Background, new Action(delegate { }));
                                     if (!string.IsNullOrEmpty(tempItem.Command))
-                                        Core.Command(tempItem.Command);                
+                                        Core.Command(tempItem.Command);
                                 });
                             }
-                            catch (Exception ex) {
+                            catch (Exception ex)
+                            {
                                 Msg.ShowException(ex);
                             }
                         };
+                       
 
                         menuItem.InputGestureText = tempItem.Input;
                     }
@@ -758,7 +774,8 @@ namespace mpvnet
 
         void Core_FileLoaded()
         {
-            BeginInvoke(new Action(() => {
+            BeginInvoke(new Action(() =>
+            {
                 SetTitleInternal();
 
                 int interval = (int)(Core.Duration.TotalMilliseconds / 100);
@@ -838,16 +855,18 @@ namespace mpvnet
             int y = GetVerticalLocation(screen);
 
             if (x == -1) pos.X = Left;
-            if (x ==  1) pos.X = Left + Width;
+            if (x == 1) pos.X = Left + Width;
             if (y == -1) pos.Y = Top;
-            if (y ==  1) pos.Y = Top + Height;
+            if (y == 1) pos.Y = Top + Height;
 
             App.Settings.WindowPosition = pos;
             App.Settings.WindowLocation = new Point(x, y);
         }
 
-        protected override CreateParams CreateParams {
-            get {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
                 CreateParams cp = base.CreateParams;
                 cp.Style |= 0x00020000 /* WS_MINIMIZEBOX */;
                 return cp;
@@ -856,9 +875,11 @@ namespace mpvnet
 
         string _Title;
 
-        public string Title {
+        public string Title
+        {
             get => _Title;
-            set {
+            set
+            {
                 if (string.IsNullOrEmpty(value))
                     return;
 
@@ -991,7 +1012,8 @@ namespace mpvnet
                     return;
                 case 0x84: // WM_NCHITTEST
                     // resize borderless window
-                    if (!Core.Border && !Core.Fullscreen) {
+                    if (!Core.Border && !Core.Fullscreen)
+                    {
                         const int HTCLIENT = 1;
                         const int HTLEFT = 10;
                         const int HTRIGHT = 11;
@@ -1084,9 +1106,9 @@ namespace mpvnet
         void PropChangeVid(string value) => Core.VID = value;
 
         void PropChangeTitle(string value) { Title = value; SetTitle(); }
-        
+
         void PropChangeEdition(int value) => Core.Edition = value;
-        
+
         void PropChangeWindowMaximized()
         {
             if (!Core.Shown)
@@ -1119,10 +1141,12 @@ namespace mpvnet
             }));
         }
 
-        void PropChangeBorder(bool enabled) {
+        void PropChangeBorder(bool enabled)
+        {
             Core.Border = enabled;
 
-            BeginInvoke(new Action(() => {
+            BeginInvoke(new Action(() =>
+            {
                 if (!IsFullscreen)
                 {
                     if (Core.Border && FormBorderStyle == FormBorderStyle.None)
@@ -1176,7 +1200,7 @@ namespace mpvnet
             App.UpdateWpfColors();
             MessageBoxEx.MessageForeground = Theme.Current.GetBrush("heading");
             MessageBoxEx.MessageBackground = Theme.Current.GetBrush("background");
-            MessageBoxEx.ButtonBackground  = Theme.Current.GetBrush("highlight");
+            MessageBoxEx.ButtonBackground = Theme.Current.GetBrush("highlight");
             ContextMenu = new WpfControls.ContextMenu();
             ContextMenu.Closed += ContextMenu_Closed;
             ContextMenu.UseLayoutRounding = true;
@@ -1306,13 +1330,15 @@ namespace mpvnet
             {
                 base.OnHandleCreated(e);
                 const int LWA_ColorKey = 1;
-                
+
                 if (Environment.OSVersion.Version > new Version(10, 0))
                     SetLayeredWindowAttributes(Handle, 0x111111, 255, LWA_ColorKey);
             }
 
-            protected override CreateParams CreateParams {
-                get {
+            protected override CreateParams CreateParams
+            {
+                get
+                {
                     const int WS_EX_LAYERED = 0x00080000;
                     CreateParams cp = base.CreateParams;
 
@@ -1325,9 +1351,12 @@ namespace mpvnet
 
             protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
             {
-                try {
+                try
+                {
                     return base.ProcessCmdKey(ref msg, keyData);
-                } catch (Exception) {
+                }
+                catch (Exception)
+                {
                     return true;
                 }
             }
@@ -1380,6 +1409,11 @@ namespace mpvnet
                 CommandPaletteHost.Width = ClientSize.Width;
 
             CommandPaletteHost.Left = (ClientSize.Width - CommandPaletteHost.Size.Width) / 2;
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
