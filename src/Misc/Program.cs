@@ -16,6 +16,7 @@ namespace mpvnet
             try
             {
                 Application.EnableVisualStyles();
+                Application.SetHighDpiMode(HighDpiMode.SystemAware);
                 Application.SetCompatibleTextRenderingDefault(false);
 
                 if (App.IsTerminalAttached)
