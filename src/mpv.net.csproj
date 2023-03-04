@@ -58,18 +58,6 @@
     <Content Include="Resources\input.conf.txt" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
@@ -82,15 +70,7 @@
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="7.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Extensions\RatingExtension\obj\x64\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Remove="Extensions\RatingExtension\Properties\AssemblyInfo.cs" />
-    <Compile Remove="Extensions\RatingExtension\RatingExtension.cs" />
-    <Compile Remove="Extensions\RatingExtension\ScriptDevelopment.cs" />
-    <Compile Remove="Scripts\C-Sharp\delete-current-file.cs" />
-    <Compile Remove="Scripts\C-Sharp\key-binding.cs" />
-    <Compile Remove="Scripts\C-Sharp\observe-property-and-draw-text.cs" />
-    <Compile Remove="Scripts\C-Sharp\pause-when-minimize.cs" />
-    <Compile Remove="Scripts\C-Sharp\rate-file.cs" />
-    <Compile Remove="Scripts\C-Sharp\switch-profile-context-menu.cs" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Scripts\**" />
   </ItemGroup>
 </Project>

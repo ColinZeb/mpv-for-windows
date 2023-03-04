@@ -33,7 +33,7 @@ namespace mpvnet
             LoadSettings();
             InitialContent = GetCompareString();
             SearchControl.Text = App.Settings.ConfigEditorSearch;
-            //FilterListBox.SelectedItem = SearchControl.Text.TrimEnd(':');
+            FilterListBox.SelectedItem = SearchControl.Text.TrimEnd(':');
         }
 
         static string GetThemeConf() => App.IsDarkMode + App.DarkTheme + App.LightTheme;
@@ -291,7 +291,7 @@ namespace mpvnet
                     else
                         i.Visibility = Visibility.Collapsed;
 
-                //FilterListBox.SelectedItem = null;
+                FilterListBox.SelectedItem = null;
             }
             else
                 foreach (UIElement i in MainStackPanel.Children)
@@ -318,9 +318,9 @@ namespace mpvnet
                 SearchControl.Text = e.AddedItems[0] + ":";
         }
 
-        void PreviewTextBlock_MouseUp(object sender, MouseButtonEventArgs e) => Msg.ShowInfo(GetContent("mpv"));
+        void PreviewTextBlock_MouseUp(object sender, RoutedEventArgs e) => Msg.ShowInfo(GetContent("mpv"));
 
-        void ShowManualTextBlock_MouseUp(object sender, MouseButtonEventArgs e) =>
+        void ShowManualTextBlock_MouseUp(object sender, RoutedEventArgs e) =>
             ProcessHelp.ShellExecute("https://mpv.io/manual/master/");
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -331,12 +331,26 @@ namespace mpvnet
                 Close();
         }
 
-        void ShowMpvNetSpecific_MouseUp(object sender, MouseButtonEventArgs e) => SearchControl.Text = "mpv.net";
+        void ShowMpvNetSpecific_MouseUp(object sender, RoutedEventArgs e) => SearchControl.Text = "mpv.net";
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
                 SearchControl.Text = e.AddedItems[0] + ":";
+        }
+
+        private void PopupBox_OnClosed(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PopupBox_OnOpened(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void ShowMpvNetSpecific_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
