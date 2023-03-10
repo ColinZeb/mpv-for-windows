@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MFW (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MFW (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
