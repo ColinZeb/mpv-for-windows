@@ -73,4 +73,7 @@
     <Compile Remove="Extensions\**" />
     <Compile Remove="Scripts\**" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mfw\mpv.lib\mpv.lib.csproj" />
+  </ItemGroup>
 </Project>
