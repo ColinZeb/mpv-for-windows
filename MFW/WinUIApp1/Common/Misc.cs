@@ -9,10 +9,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Windows.Forms;
 
 using Microsoft.Win32;
-
+using WinUIApp1;
 using static mpvnet.Global;
 
 namespace mpvnet
@@ -74,9 +73,9 @@ namespace mpvnet
 
     public class FileAssociation
     {
-        static string ExePath = Application.ExecutablePath;
-        static string ExeFilename = Path.GetFileName(Application.ExecutablePath);
-        static string ExeFilenameNoExt = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+        static string ExePath = AppContext.BaseDirectory;
+        static string ExeFilename = Path.GetFileName(ExePath);
+        static string ExeFilenameNoExt = Path.GetFileNameWithoutExtension(ExePath);
 
         public static void Register(string perceivedType, string[] extensions)
         {
@@ -257,7 +256,7 @@ namespace mpvnet
 
     public class Folder
     {
-        public static string Startup { get; } = Application.StartupPath.AddSep();
+        public static string Startup { get; } = AppContext.BaseDirectory;
         public static string AppData { get; } = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).AddSep();
     }
 
@@ -285,8 +284,7 @@ namespace mpvnet
     }
 
     public class CommandPalette
-    {
-        public static CommandPaletteControl Instance { get; } = new CommandPaletteControl();
+    { 
 
         public static IEnumerable<CommandPaletteItem> GetItems()
         {

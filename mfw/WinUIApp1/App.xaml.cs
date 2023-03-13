@@ -30,6 +30,29 @@ namespace WinUIApp1
             m_window.Activate();
         }
 
+        internal static void RunTask(Action value)
+        {
+            Task.Run(value);
+        }
+
+        internal static void ShowException(Exception ex)
+        {
+            throw new NotImplementedException();
+        }
+
         private Window m_window;
+
+        public static bool ShowLogo { get; internal set; }
+        public static string[] HistoryFilter { get; internal set; }
+        public static bool AutoLoadFolder { get; internal set; }
+        public static bool AutoPlay { get; internal set; }
+        public static int QuickBookmark { get; internal set; }
+        public static string StartSize { get; internal set; }
+        public static bool DebugMode { get; internal set; }
+        public static int StartThreshold { get; internal set; }
+        public static bool Version { get; internal set; }
+        public static bool IsTerminalAttached { get; internal set; }
+        public static bool MediaInfo { get; internal set; }
+        public static string ProductName { get; internal set; }
     }
 }

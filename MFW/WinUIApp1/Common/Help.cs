@@ -7,10 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
 
 using Microsoft.Win32;
-
+using WinUIApp1;
 using static mpvnet.Global;
 
 namespace mpvnet
@@ -36,7 +35,7 @@ namespace mpvnet
                 if (File.Exists(path))
                     File.Delete(path);
             } catch (Exception ex) {
-                Terminal.WriteError("Failed to delete file:" + BR + path + BR + ex.Message);
+                //Terminal.WriteError("Failed to delete file:" + BR + path + BR + ex.Message);
             }
         }
     }
@@ -64,37 +63,7 @@ namespace mpvnet
                 proc.Start();
             }
         }
-    }
-
-    public class CursorHelp
-    {
-        static bool IsVisible = true;
-
-        public static void Show()
-        {
-            if (!IsVisible)
-            {
-                Cursor.Show();
-                IsVisible = true;
-            }
-        }
-
-        public static void Hide()
-        {
-            if (IsVisible)
-            {
-                Cursor.Hide();
-                IsVisible = false;
-            }
-        }
-
-        public static bool IsPosDifferent(Point screenPos)
-        {
-            return Math.Abs(screenPos.X - Control.MousePosition.X) > 10 ||
-                   Math.Abs(screenPos.Y - Control.MousePosition.Y) > 10;
-        }
-    }
-
+    } 
     public class mpvHelp
     {
         public static string GetProfiles()
@@ -143,7 +112,7 @@ namespace mpvnet
 
     public class RegistryHelp
     {
-        public static string ApplicationKey { get; } = @"HKCU\Software\" + Application.ProductName;
+        public static string ApplicationKey { get; } = @"HKCU\Software\" + App.ProductName;
 
         public static void SetInt(string name, object value)
         {

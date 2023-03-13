@@ -10,11 +10,11 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows.Forms;
 
 using static libmpv;
 using static mpvnet.Global;
 using System.Text.RegularExpressions;
+using WinUIApp1;
 
 namespace mpvnet
 {
@@ -155,15 +155,15 @@ namespace mpvnet
 
             ProcessCommandLine(true);
 
-            Environment.SetEnvironmentVariable("MPVNET_VERSION", Application.ProductVersion);
+            //Environment.SetEnvironmentVariable("MPVNET_VERSION", Application.ProductVersion);
 
             mpv_error err = mpv_initialize(Handle);
 
             if (err < 0)
                 throw new Exception("mpv_initialize error" + BR2 + GetError(err) + BR);
 
-            string idle = GetPropertyString("idle");
-            App.Exit = idle == "no" || idle == "once";
+            //string idle = GetPropertyString("idle");
+            //App.Exit = idle == "no" || idle == "once";
 
             NamedHandle = mpv_create_client(Handle, "mpvnet");
 
@@ -178,7 +178,7 @@ namespace mpvnet
             // this means Lua scripts that use idle might not work correctly
             SetPropertyString("idle", "yes");
 
-            ObservePropertyDouble("window-scale", value => WindowScaleMpv(value));
+            ObservePropertyDouble("window-scale", value => WindowScaleMpv?.Invoke(value));
 
             ObservePropertyString("path", value =>
             {
@@ -193,7 +193,7 @@ namespace mpvnet
             ObservePropertyBool("pause", value =>
             {
                 Paused = value;
-                Pause();
+                Pause?.Invoke();
             });
 
             ObservePropertyInt("video-rotate", value =>
@@ -215,7 +215,7 @@ namespace mpvnet
 
                 if (FileEnded && value == -1)
                 {
-                    if (GetPropertyString("keep-open") == "no" && App.Exit)
+                    if (GetPropertyString("keep-open") == "no")
                         Core.CommandV("quit");
                 }
             });
@@ -235,40 +235,40 @@ namespace mpvnet
 
         void ApplyShowMenuFix()
         {
-            if (App.Settings.ShowMenuFixApplied)
-                return;
+            //if (App.Settings.ShowMenuFixApplied)
+            //    return;
 
-            if (File.Exists(InputConfPath))
-            {
-                string content = File.ReadAllText(InputConfPath);
+            //if (File.Exists(InputConfPath))
+            //{
+            //    string content = File.ReadAllText(InputConfPath);
 
-                if (!content.Contains("script-message mpv.net show-menu") &&
-                    !content.Contains("script-message-to mpvnet show-menu"))
+            //    if (!content.Contains("script-message mpv.net show-menu") &&
+            //        !content.Contains("script-message-to mpvnet show-menu"))
 
-                    File.WriteAllText(InputConfPath, BR + content.Trim() + BR +
-                        "MBTN_Right script-message-to mpvnet show-menu" + BR);
-            }
+            //        File.WriteAllText(InputConfPath, BR + content.Trim() + BR +
+            //            "MBTN_Right script-message-to mpvnet show-menu" + BR);
+            //}
 
-            App.Settings.ShowMenuFixApplied = true;
+            //App.Settings.ShowMenuFixApplied = true;
         }
 
         void ApplyInputDefaultBindingsFix()
         {
-            if (App.Settings.InputDefaultBindingsFixApplied)
-                return;
+            //if (App.Settings.InputDefaultBindingsFixApplied)
+            //    return;
 
-            if (File.Exists(ConfPath))
-            {
-                string content = File.ReadAllText(ConfPath);
+            //if (File.Exists(ConfPath))
+            //{
+            //    string content = File.ReadAllText(ConfPath);
 
-                if (content.Contains("input-default-bindings = no"))
-                    File.WriteAllText(ConfPath, content.Replace("input-default-bindings = no", ""));
+            //    if (content.Contains("input-default-bindings = no"))
+            //        File.WriteAllText(ConfPath, content.Replace("input-default-bindings = no", ""));
 
-                if (content.Contains("input-default-bindings=no"))
-                    File.WriteAllText(ConfPath, content.Replace("input-default-bindings=no", ""));
-            }
+            //    if (content.Contains("input-default-bindings=no"))
+            //        File.WriteAllText(ConfPath, content.Replace("input-default-bindings=no", ""));
+            //}
 
-            App.Settings.InputDefaultBindingsFixApplied = true;
+            //App.Settings.InputDefaultBindingsFixApplied = true;
         }
 
         public void ProcessProperty(string name, string value)
@@ -358,49 +358,7 @@ namespace mpvnet
                     if (!Directory.Exists(_ConfigFolder))
                         _ConfigFolder = Folder.AppData + "mpv.net";
 
-                    if (!Directory.Exists(_ConfigFolder))
-                    {
-                        try
-                        {
-                            using (Process proc = new Process())
-                            {
-                                proc.StartInfo.UseShellExecute = false;
-                                proc.StartInfo.CreateNoWindow = true;
-                                proc.StartInfo.FileName = "powershell.exe";
-                                proc.StartInfo.Arguments = $@"-Command New-Item -Path '{_ConfigFolder}' -ItemType Directory";
-                                proc.Start();
-                                proc.WaitForExit();
-                            }
-                        }
-                        catch (Exception) { }
 
-                        if (!Directory.Exists(_ConfigFolder))
-                            Directory.CreateDirectory(_ConfigFolder);
-                    }
-
-                    _ConfigFolder = _ConfigFolder.AddSep();
-
-                    if (!File.Exists(_ConfigFolder + "input.conf"))
-                    {
-                        File.WriteAllText(_ConfigFolder + "input.conf", Properties.Resources.input_conf);
-
-                        string scriptOptsPath = _ConfigFolder + "script-opts" + System.IO.Path.DirectorySeparatorChar;
-
-                        if (!Directory.Exists(scriptOptsPath))
-                        {
-                            Directory.CreateDirectory(scriptOptsPath);
-                            File.WriteAllText(scriptOptsPath + "console.conf", BR + "scale=1.5" + BR);
-                            string content = BR + "scalewindowed=1.5" + BR + "hidetimeout=2000" + BR +
-                                             "idlescreen=no" + BR;
-                            File.WriteAllText(scriptOptsPath + "osc.conf", content);
-                        }
-                    }
-                    if (!File.Exists(_ConfigFolder + "input.json"))
-                    {
-                        File.WriteAllText(_ConfigFolder + "input.json", Properties.Resources.input);
-
-
-                    }
                 }
 
                 return _ConfigFolder;
@@ -444,71 +402,7 @@ namespace mpvnet
                 return _Conf;
             }
         }
-
-        public void LoadScripts()
-        {
-            if (Directory.Exists(ConfigFolder + "scripts-ps"))
-                foreach (string file in Directory.GetFiles(ConfigFolder + "scripts-ps", "*.ps1"))
-                    App.RunTask(() => InvokePowerShellScript(file));
-        }
-
-        public void InvokePowerShellScript(string file)
-        {
-            PowerShell ps = new PowerShell();
-            ps.Variables.Add(new KeyValuePair<string, object>("core", Core));
-            ps.Variables.Add(new KeyValuePair<string, object>("window", MainForm.Instance));
-            ps.Scripts.Add("Using namespace mpvnet; [Reflection.Assembly]::LoadWithPartialName('mpvnet')" + BR);
-
-            string eventCode = @"
-                $eventJob = Register-ObjectEvent -InputObject $mp -EventName Event -Action {
-                    foreach ($pair in $mp.EventHandlers)
-                    {
-                        if ($pair.Key -eq $args[0])
-                        {
-                            if ($args.Length -gt 1)
-                            {
-                                $args2 = $args[1]
-                            }
-
-                            Invoke-Command -ScriptBlock $pair.Value -ArgumentList $args2
-                        }
-                    }
-                }
-
-                $mp.RedirectStreams($eventJob)
-            ";
-
-            string propertyChangedCode = @"
-                $propertyChangedJob = Register-ObjectEvent -InputObject $mp -EventName PropertyChanged -Action {
-                    foreach ($pair in $mp.PropChangedHandlers)
-                    {
-                        if ($pair.Key -eq $args[0])
-                        {
-                            if ($args.Length -gt 1)
-                            {
-                                $args2 = $args[1]
-                            }
-
-                            Invoke-Command -ScriptBlock $pair.Value -ArgumentList $args2
-                        }
-                    }
-                }
-
-                $mp.RedirectStreams($propertyChangedJob)
-            ";
-
-            ps.Scripts.Add(eventCode);
-            ps.Scripts.Add(propertyChangedCode);
-            ps.Scripts.Add(File.ReadAllText(file));
-            ps.Module = System.IO.Path.GetFileName(file);
-            ps.Print = true;
-
-            lock (PowerShell.References)
-                PowerShell.References.Add(ps);
-
-            ps.Invoke();
-        }
-
+         
         void UpdateVideoSize(string w, string h)
         {
             Size size = new Size(GetPropertyInt(w), GetPropertyInt(h));
@@ -572,24 +466,24 @@ namespace mpvnet
                             break;
                         case mpv_event_id.MPV_EVENT_CLIENT_MESSAGE:
                             {
-                                var data = (mpv_event_client_message)Marshal.PtrToStructure(evt.data, typeof(mpv_event_client_message));
-                                string[] args = ConvertFromUtf8Strings(data.args, data.num_args);
+                                //var data = (mpv_event_client_message)Marshal.PtrToStructure(evt.data, typeof(mpv_event_client_message));
+                                //string[] args = ConvertFromUtf8Strings(data.args, data.num_args);
 
-                                if (UseNewMsgModel && args[0] != "mpv.net")
-                                    App.RunTask(() => Commands.Execute(args[0], args.Skip(1).ToArray()));
-                                else if (args.Length > 1 && args[0] == "mpv.net")
-                                    App.RunTask(() => Commands.Execute(args[1], args.Skip(2).ToArray()));
+                                //if (UseNewMsgModel && args[0] != "mpv.net")
+                                //    App.RunTask(() => Commands.Execute(args[0], args.Skip(1).ToArray()));
+                                //else if (args.Length > 1 && args[0] == "mpv.net")
+                                //    App.RunTask(() => Commands.Execute(args[1], args.Skip(2).ToArray()));
 
-                                if (args.Length > 1 && args[0] == "osc-idlescreen")
-                                {
-                                    if (args[1] == "no")
-                                        HideLogo();
-                                    else if (args[1] == "yes" && PlaylistPos == -1)
-                                        ShowLogo();
-                                }
+                                //if (args.Length > 1 && args[0] == "osc-idlescreen")
+                                //{
+                                //    if (args[1] == "no")
+                                //        HideLogo();
+                                //    else if (args[1] == "yes" && PlaylistPos == -1)
+                                //        ShowLogo();
+                                //}
 
-                                InvokeAsync(ClientMessageAsync, args);
-                                ClientMessage?.Invoke(args);
+                                //InvokeAsync(ClientMessageAsync, args);
+                                //ClientMessage?.Invoke(args);
                             }
                             break;
                         case mpv_event_id.MPV_EVENT_VIDEO_RECONFIG:
@@ -724,6 +618,11 @@ namespace mpvnet
                     App.ShowException(ex);
                 }
             }
+        }
+
+        private void ShowLogo()
+        {
+            throw new NotImplementedException();
         }
 
         void ProcessBluRayLogMessage(string msg)
@@ -1081,130 +980,130 @@ namespace mpvnet
 
         public void HandleError(mpv_error err, string msg)
         {
-            Terminal.WriteError(msg);
-            Terminal.WriteError(GetError(err));
+            //Terminal.WriteError(msg);
+            //Terminal.WriteError(GetError(err));
         }
 
         public void ProcessCommandLine(bool preInit)
         {
-            bool shuffle = false;
-            var args = Environment.GetCommandLineArgs().Skip(1);
+            //bool shuffle = false;
+            //var args = Environment.GetCommandLineArgs().Skip(1);
 
-            string[] preInitProperties = { "input-terminal", "terminal", "input-file", "config",
-                "config-dir", "input-conf", "load-scripts", "scripts", "player-operation-mode",
-                "idle", "log-file", "msg-color", "dump-stats", "msg-level", "really-quiet" };
+            //string[] preInitProperties = { "input-terminal", "terminal", "input-file", "config",
+            //    "config-dir", "input-conf", "load-scripts", "scripts", "player-operation-mode",
+            //    "idle", "log-file", "msg-color", "dump-stats", "msg-level", "really-quiet" };
 
-            foreach (string i in args)
-            {
-                string arg = i;
+            //foreach (string i in args)
+            //{
+            //    string arg = i;
 
-                if (arg.StartsWith("-") && arg.Length > 1)
-                {
-                    if (!preInit)
-                    {
-                        if (arg == "--profile=help")
-                        {
-                            Console.WriteLine(mpvHelp.GetProfiles());
-                            continue;
-                        }
-                        else if (arg == "--vd=help" || arg == "--ad=help")
-                        {
-                            Console.WriteLine(mpvHelp.GetDecoders());
-                            continue;
-                        }
-                        else if (arg == "--audio-device=help")
-                        {
-                            Console.WriteLine(GetPropertyOsdString("audio-device-list"));
-                            continue;
-                        }
-                        else if (arg == "--version")
-                        {
-                            Console.WriteLine(App.Version);
-                            continue;
-                        }
-                        else if (arg == "--input-keylist")
-                        {
-                            Console.WriteLine(GetPropertyString("input-key-list").Replace(",", BR));
-                            continue;
-                        }
-                        else if (arg.StartsWith("--command="))
-                        {
-                            Command(arg.Substring(10));
-                            continue;
-                        }
-                    }
+            //    if (arg.StartsWith("-") && arg.Length > 1)
+            //    {
+            //        if (!preInit)
+            //        {
+            //            if (arg == "--profile=help")
+            //            {
+            //                Console.WriteLine(mpvHelp.GetProfiles());
+            //                continue;
+            //            }
+            //            else if (arg == "--vd=help" || arg == "--ad=help")
+            //            {
+            //                Console.WriteLine(mpvHelp.GetDecoders());
+            //                continue;
+            //            }
+            //            else if (arg == "--audio-device=help")
+            //            {
+            //                Console.WriteLine(GetPropertyOsdString("audio-device-list"));
+            //                continue;
+            //            }
+            //            else if (arg == "--version")
+            //            {
+            //                Console.WriteLine(App.Version);
+            //                continue;
+            //            }
+            //            else if (arg == "--input-keylist")
+            //            {
+            //                Console.WriteLine(GetPropertyString("input-key-list").Replace(",", BR));
+            //                continue;
+            //            }
+            //            else if (arg.StartsWith("--command="))
+            //            {
+            //                Command(arg.Substring(10));
+            //                continue;
+            //            }
+            //        }
 
-                    if (!arg.StartsWith("--"))
-                        arg = "-" + arg;
+            //        if (!arg.StartsWith("--"))
+            //            arg = "-" + arg;
 
-                    if (!arg.Contains("="))
-                    {
-                        if (arg.Contains("--no-"))
-                        {
-                            arg = arg.Replace("--no-", "--");
-                            arg += "=no";
-                        }
-                        else
-                            arg += "=yes";
-                    }
+            //        if (!arg.Contains("="))
+            //        {
+            //            if (arg.Contains("--no-"))
+            //            {
+            //                arg = arg.Replace("--no-", "--");
+            //                arg += "=no";
+            //            }
+            //            else
+            //                arg += "=yes";
+            //        }
 
-                    string left = arg.Substring(2, arg.IndexOf("=") - 2);
-                    string right = arg.Substring(left.Length + 3);
+            //        string left = arg.Substring(2, arg.IndexOf("=") - 2);
+            //        string right = arg.Substring(left.Length + 3);
 
-                    switch (left)
-                    {
-                        case "script": left = "scripts"; break;
-                        case "audio-file": left = "audio-files"; break;
-                        case "sub-file": left = "sub-files"; break;
-                        case "external-file": left = "external-files"; break;
-                    }
+            //        switch (left)
+            //        {
+            //            case "script": left = "scripts"; break;
+            //            case "audio-file": left = "audio-files"; break;
+            //            case "sub-file": left = "sub-files"; break;
+            //            case "external-file": left = "external-files"; break;
+            //        }
 
-                    if (preInit && preInitProperties.Contains(left))
-                    {
-                        ProcessProperty(left, right);
+            //        if (preInit && preInitProperties.Contains(left))
+            //        {
+            //            ProcessProperty(left, right);
 
-                        if (!App.ProcessProperty(left, right))
-                            SetPropertyString(left, right);
-                    }
-                    else if (!preInit && !preInitProperties.Contains(left))
-                    {
-                        ProcessProperty(left, right);
+            //            if (!App.ProcessProperty(left, right))
+            //                SetPropertyString(left, right);
+            //        }
+            //        else if (!preInit && !preInitProperties.Contains(left))
+            //        {
+            //            ProcessProperty(left, right);
 
-                        if (!App.ProcessProperty(left, right))
-                        {
-                            SetPropertyString(left, right);
+            //            if (!App.ProcessProperty(left, right))
+            //            {
+            //                SetPropertyString(left, right);
 
-                            if (left == "shuffle" && right == "yes")
-                                shuffle = true;
-                        }
-                    }
-                }
-            }
+            //                if (left == "shuffle" && right == "yes")
+            //                    shuffle = true;
+            //            }
+            //        }
+            //    }
+            //}
 
-            if (!preInit)
-            {
-                List<string> files = new List<string>();
+            //if (!preInit)
+            //{
+            //    List<string> files = new List<string>();
 
-                foreach (string i in args)
-                    if (!i.StartsWith("--") && (i == "-" || i.Contains("://") ||
-                        i.Contains(":\\") || i.StartsWith("\\\\") || File.Exists(i)))
+            //    foreach (string i in args)
+            //        if (!i.StartsWith("--") && (i == "-" || i.Contains("://") ||
+            //            i.Contains(":\\") || i.StartsWith("\\\\") || File.Exists(i)))
 
-                        files.Add(i);
+            //            files.Add(i);
 
-                LoadFiles(files.ToArray(), !App.Queue, Control.ModifierKeys.HasFlag(Keys.Control) || App.Queue);
+            //    LoadFiles(files.ToArray(), !App.Queue, Control.ModifierKeys.HasFlag(Keys.Control) || App.Queue);
 
-                if (shuffle)
-                {
-                    Command("playlist-shuffle");
-                    SetPropertyInt("playlist-pos", 0);
-                }
+            //    if (shuffle)
+            //    {
+            //        Command("playlist-shuffle");
+            //        SetPropertyInt("playlist-pos", 0);
+            //    }
 
-                if (files.Count == 0 || files[0].Contains("://"))
-                {
-                    VideoSizeChanged?.Invoke(VideoSize);
-                    VideoSizeAutoResetEvent.Set();
-                }
-            }
+            //    if (files.Count == 0 || files[0].Contains("://"))
+            //    {
+            //        VideoSizeChanged?.Invoke(VideoSize);
+            //        VideoSizeAutoResetEvent.Set();
+            //    }
+            //}
         }
 
         public DateTime LastLoad;
@@ -1281,24 +1180,21 @@ namespace mpvnet
 
             if (gb < 10)
             {
-                System.Windows.MessageBoxResult result =
-                    Msg.ShowQuestion("Click Yes for Blu-ray and No for DVD.",
-                    System.Windows.MessageBoxButton.YesNoCancel);
-
-                switch (result)
+                var msg = "Click Yes for Blu-ray and No for DVD.";
+                var result = true;
+                if (result)
                 {
-                    case System.Windows.MessageBoxResult.Yes:
-                        Command("stop");
-                        Thread.Sleep(500);
-                        SetPropertyString("bluray-device", path);
-                        LoadFiles(new[] { @"bd://" }, false, false);
-                        break;
-                    case System.Windows.MessageBoxResult.No:
-                        Command("stop");
-                        Thread.Sleep(500);
-                        SetPropertyString("dvd-device", path);
-                        LoadFiles(new[] { @"dvd://" }, false, false);
-                        break;
+                    Command("stop");
+                    Thread.Sleep(500);
+                    SetPropertyString("bluray-device", path);
+                    LoadFiles(new[] { @"bd://" }, false, false);
+                }
+                else
+                {
+                    Command("stop");
+                    Thread.Sleep(500);
+                    SetPropertyString("dvd-device", path);
+                    LoadFiles(new[] { @"dvd://" }, false, false);
                 }
             }
             else
@@ -1331,7 +1227,7 @@ namespace mpvnet
 
         public void LoadFolder()
         {
-            if (!App.AutoLoadFolder || Control.ModifierKeys.HasFlag(Keys.Shift))
+            if (!App.AutoLoadFolder)
                 return;
 
             Thread.Sleep(1000);
@@ -1419,36 +1315,6 @@ namespace mpvnet
                     if (HistoryPath.Contains(filter.Trim()))
                         return true;
             return false;
-        }
-
-        public void ShowLogo()
-        {
-            if (!App.ShowLogo || MainForm.Instance == null || Core.Handle == IntPtr.Zero)
-                return;
-
-            bool december = DateTime.Now.Month == 12;
-            Rectangle cr = MainForm.Instance.ClientRectangle;
-            int len = Convert.ToInt32(cr.Height / (december ? 4.5 : 5));
-
-            if (len < 16 || cr.Height < 16)
-                return;
-
-            using (Bitmap bmp = new Bitmap(len, len))
-            {
-                using (Graphics gx = Graphics.FromImage(bmp))
-                {
-                    gx.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    gx.Clear(Color.Black);
-                    Rectangle rect = new Rectangle(0, 0, len, len);
-                    Bitmap bmp2 = (december && App.ShowSantaLogo) ? Properties.Resources.mpvnet_santa : Properties.Resources.mpvnet;
-                    gx.DrawImage(bmp2, rect);
-                    BitmapData bd = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format32bppPArgb);
-                    int x = Convert.ToInt32((cr.Width - len) / (december ? 1.95 : 2));
-                    int y = Convert.ToInt32((cr.Height - len) / 2.0 * (december ? 0.85 : 0.9));
-                    CommandV("overlay-add", "0", $"{x}", $"{y}", "&" + bd.Scan0.ToInt64().ToString(), "0", "bgra", bd.Width.ToString(), bd.Height.ToString(), bd.Stride.ToString());
-                    bmp.UnlockBits(bd);
-                }
-            }
         }
 
         void HideLogo() => Command("overlay-remove 0");
